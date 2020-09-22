@@ -2,41 +2,29 @@
 
 <?php
 
+//Ocultar admin bar a todos los usuarios
+add_action('after_setup_theme', 'bld_ocultar_admin_bar');
+function bld_ocultar_admin_bar() {
+add_filter( 'show_admin_bar', '__return_false' );
+}
+
 function my_theme_setup() {
-    // Ready for i18n
-    load_theme_textdomain( "my_theme", TEMPLATEPATH . "/languages");
-
-    // Use thumbnails
-    add_theme_support( 'post-thumbnails' );
-
-    // Add default posts and comments RSS feed links to head.
-    add_theme_support( 'automatic-feed-links' );
-
-    // Let WordPress manage the document title
-    add_theme_support( 'title-tag' );
-
-    // Enable support for custom logo.
-    add_theme_support( 'custom-logo', array(
-        'height' =&gt; 240,
-        'width' =&gt; 240,
-        'flex-height' =&gt; true,
-    ) );
+    
 
     // Register Navigation Menus
     register_nav_menus(array(
-        'header-menu' =&gt; 'Header Menu',
-        'footer-menu' =&gt; 'Footer Menu',
+        'header-menu' => 'Header Menu',
+        'footer-menu' => 'Footer Menu',
     ));
 
-    // Switch default core markup for search form, comment form, and comments to output valid HTML5.
-    add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
 }
 add_action( 'after_setup_theme', 'my_theme_setup' );
 
 
 function my_theme_cssjs() {
-    wp_enqueue_style( 'my-theme-style', get_template_directory_uri() . '/styles.css' );
-    wp_enqueue_script( 'my-theme-js', get_template_directory_uri() . '/scripts.js', array( 'jquery' ), '', true );
+    wp_enqueue_style( 'bootstrap-style', get_template_directory_uri() . '/css/css/bootstrap.min.css' );
+    wp_enqueue_style( 'main-style', get_template_directory_uri() . '/css/css/style.css' );
+    wp_enqueue_script( 'bootstrap-js', get_template_directory_uri() . '/js/js/bootstrap.js', array( 'bootstrap' ), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'my_theme_cssjs' );
 

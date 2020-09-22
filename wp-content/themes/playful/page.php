@@ -33,10 +33,9 @@ get_header();?>
                     </div>
                 </div><!-- row -->
             </div><!-- container -->
-
-        <?php endwhile;
-    endif;?>
-
+    <?php else :
+        _e( "No se han encontrado resultados", "tu-textdomain" );
+    endif; ?>
 </main>
 
 <?php get_footer();
