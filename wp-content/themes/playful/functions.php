@@ -1,6 +1,30 @@
 
 
 <?php
+// read more change text
+ function change_read_more($textMore){
+ 	if (is_admin()) {
+ 		return $textMore;
+ 	}
+ 	return sprintf('<a href="%s">...Read more</a>',esc_url(get_the_permalink()));
+ }
+ add_filter('excerpt_more', 'change_read_more');
+
+// register Menu
+function register_menu(){
+	register_nav_menu('menu-header',__('Menu header'));
+	register_nav_menu('menu-footer',__('Menu footer'));
+}
+add_action('init','register_menu');
+
+// remove gutenber editor 
+add_filter("use_block_editor_for_post_type", "disable_gutenber_editor");
+ function disable_gutenber_editor(){
+ 	return false;
+ }
+
+ // support feature image 
+ add_theme_support("post-thumbnails");
 
 //Ocultar admin bar a todos los usuarios
 add_action('after_setup_theme', 'bld_ocultar_admin_bar');
